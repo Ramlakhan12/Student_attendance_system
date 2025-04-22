@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+        }
+        .button-group a,
+        .button-group button {
+            padding: 12px 25px;
+            background-color: #0066ff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .button-group a:hover,
+        .button-group button:hover {
+            background-color: #004ec2;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #1c7c34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Teacher Dashboard</h1>
+
+        <div class="button-group">
+            <form action="/mark_attendance" method="post">
+                <button type="submit">Mark Attendance</button>
+            </form>
+            <a href="/download_report" download>Download Report</a>
+        </div>
+
+        <form action="/upload_student_image" method="post" enctype="multipart/form-data">
+            <label for="student_id">Student ID:</label>
+            <input type="text" name="student_id" id="student_id" required>
+
+            <label for="image">Upload Student Image:</label>
+            <input type="file" name="image" id="image" accept="image/*" required>
+
+            <input type="submit" value="Upload and Process">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white p-6 shadow-md">
+        <h1 class="text-3xl font-bold">👩‍🏫 Teacher Dashboard</h1>
+        <p class="text-sm mt-1">Manage attendance and download reports easily</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
+
+        <!-- Success Message -->
+        {% if messages %}
+  <div>
+    {% for message in messages %}
+      <div 
+        style="margin: 10px; padding: 15px; border-radius: 8px;
+               {% if message.tags == 'success' %}background-color: #d4edda; color: #155724;
+               {% elif message.tags == 'error' %}background-color: #f8d7da; color: #721c24;
+               {% else %}background-color: #cce5ff; color: #004085;
+               {% endif %}">
+        {{ message|safe }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+        <!-- Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+
+            <!-- Mark Attendance -->
+            <form action="{% url 'mark_attendance' %}" method="post" class="bg-indigo-100 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+                {% csrf_token %}
+                <h2 class="text-xl font-semibold mb-4">📸 Mark Attendance</h2>
+                <p class="text-sm text-gray-600 mb-4">Automatically mark students using face recognition.</p>
+                <button type="submit" class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
+                    Start Attendance
+                </button>
+            </form>
+
+            <!-- Download Report -->
+            <div class="bg-green-100 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+                <h2 class="text-xl font-semibold mb-4">📥 Download Report</h2>
+                <p class="text-sm text-gray-600 mb-4">Get the attendance report as a CSV file.</p>
+                <a href="{% url 'download_report' %}">
+                    <button class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                        Download CSV
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-sm mt-12 mb-4">
+        © {{ now|date:"Y" }} Student Attendance System | Made by Ram Lakhan
+    </footer>
+
+</body>
+</html>
